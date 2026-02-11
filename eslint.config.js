@@ -6,14 +6,13 @@ import angularTemplateParser from '@angular-eslint/template-parser';
 import prettier from 'eslint-config-prettier';
 
 export default [
-  // 1️⃣ 基本 JS 規則
-  js.configs.recommended,
+  // 1️⃣ 全域忽略設定 (選填，建議加上)
+  { ignores: ['dist/', 'node_modules/'] },
 
-  // 2️⃣ TypeScript 設定
-  ...tseslint.configs.recommended,
-
+  // 2️⃣ TypeScript 設定 & JS 規則
   {
     files: ['**/*.ts'],
+    extends: [js.configs.recommended, ...tseslint.configs.recommended],
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
