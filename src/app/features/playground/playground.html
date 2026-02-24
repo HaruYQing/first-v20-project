@@ -1,1 +1,8 @@
-<p>playground works!</p>
+<mat-form-field>
+  <mat-label>Test</mat-label>
+  <mat-select [formControl]="testSelect">
+    @for (item of testSelectList; track $index) {
+      <mat-option [value]="item">{{ item }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
