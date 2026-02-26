@@ -1,6 +1,12 @@
 {
   "root": true,
-  "ignorePatterns": ["projects/**/*", "dist/**/*", ".angular/**/*", "node_modules/**/*"],
+  "ignorePatterns": [
+    "projects/**/*",
+    "dist/**/*",
+    ".angular/**/*",
+    "node_modules/**/*",
+    "src/stories/**"
+  ],
   "overrides": [
     {
       "files": ["*.ts"],
@@ -35,7 +41,6 @@
         ],
         "@angular-eslint/no-empty-lifecycle-method": "warn",
         "@angular-eslint/use-lifecycle-interface": "error",
-
         // ========== TypeScript 規則 ==========
         "@typescript-eslint/no-explicit-any": "warn",
         "@typescript-eslint/no-unused-vars": [
@@ -47,9 +52,13 @@
         ],
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
-
         // ========== 一般規則 ==========
-        "no-console": ["warn", { "allow": ["warn", "error"] }],
+        "no-console": [
+          "warn",
+          {
+            "allow": ["warn", "error"]
+          }
+        ],
         "no-debugger": "warn",
         "prefer-const": "error",
         "no-var": "error",
@@ -66,5 +75,6 @@
         "@angular-eslint/template/use-track-by-function": "warn"
       }
     }
-  ]
+  ],
+  "extends": ["plugin:storybook/recommended"]
 }
