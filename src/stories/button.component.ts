@@ -60,7 +60,7 @@ export class ButtonComponent {
 
   public get styles(): Record<string, string> {
     return {
-      'background-color': this.backgroundColor ?? 'transparent',
+      'background-color': this.backgroundColor ?? (this.primary ? '#555ab9' : 'transparent'),
       'border-color': this.outlineColor(),
     };
   }
