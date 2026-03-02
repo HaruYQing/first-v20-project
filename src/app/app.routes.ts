@@ -7,6 +7,10 @@ export const routes: Routes = [
     component: Layout,
     children: [
       {
+        path: '',
+        loadComponent: () => import('./features/home/home').then((m) => m.Home),
+      },
+      {
         path: 'playground',
         loadComponent: () => import('./features/playground/playground').then((m) => m.Playground),
       },
