@@ -1,0 +1,87 @@
+<div class="detailed-select-container">
+  <!-- Title -->
+  @if (label() !== '') {
+    <div class="title">
+      {{ label() }}
+      @if (required()) {
+        <span class="required-mark">*</span>
+      }
+    </div>
+  }
+  <!-- [followCursorTooltip]="tooltipMessage() !== '' ? tooltipMessage() : null" -->
+  <mat-form-field
+    appearance="outline"
+    [class.--error-state]="errorMessage() !== '' || errorState()"
+  >
+    <!-- [isMultipleSelector]="false" -->
+    <mat-select
+      appMatSelectKeyboardNavigation
+      hideSingleSelectionIndicator="true"
+      [panelClass]="panelClasses()"
+      [disabled]="currentDisabled()"
+      [placeholder]="placeholder()"
+      [value]="currentValue()"
+      (selectionChange)="onSelectionChange($event)"
+      (opened)="isOpened = true"
+      (closed)="isOpened = false"
+      (blur)="onBlur()"
+    >
+      <mat-select-trigger>
+        @if (selectedOption()) {
+          <mat-icon [svgIcon]="'label_' + selectedOption()?.icon?.toLocaleLowerCase()" />
+          <div class="text-container">
+            <div class="text">{{ selectedOption()?.text }}</div>
+            <div class="data-type">{{ selectedOption()?.icon }}</div>
+          </div>
+        }
+      </mat-select-trigger>
+
+      <div class="search-container">
+        <!-- Search -->
+        @if (searchable()) {
+          <mat-icon svgIcon="search" class="search-icon" />
+          <mat-option class="search-option">
+            <ngx-mat-select-search
+              [formControl]="searchFilterCtrl"
+              placeholderLabel="Search"
+              noEntriesFoundLabel="No results found"
+              [hideClearSearchButton]="true"
+            />
+          </mat-option>
+        }
+      </div>
+      <!-- showClearOption -->
+      @if (showClearOption()) {
+        <mat-option [value]="null">
+          {{ placeholder() }}
+        </mat-option>
+      }
+      <!-- options -->
+      @for (option of filteredOptions | async; track option.value) {
+        <!-- [followCursorTooltip]="option.disabled ? option.optionTooltip : ''" -->
+        <mat-option [class.--option-disabled]="option.disabled" [value]="option.value">
+          @if (option.icon) {
+            <mat-icon [svgIcon]="'label_' + option.icon.toLocaleLowerCase()" />
+          }
+          <div class="text-container">
+            <div class="text">{{ option.text }}</div>
+            <div class="data-type">{{ option.icon }}</div>
+          </div>
+        </mat-option>
+      }
+    </mat-select>
+    @if (isLoading()) {
+      <mat-spinner class="inline-spinner" />
+    }
+    <ng-container matSuffix>
+      <mat-icon svgIcon="chevron_right" class="arrow-icon" [class.--arrow-up]="isOpened" />
+    </ng-container>
+  </mat-form-field>
+
+  <!-- Help text or Error message -->
+  @if (errorMessage() !== '') {
+    <div class="error-message assistive-text">{{ errorMessage() }}</div>
+  } @else if (helpText()) {
+    <div class="help-text assistive-text">{{ helpText() }}</div>
+  }
+</div>
