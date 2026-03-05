@@ -1,0 +1,47 @@
+<!-- root container that provides flow context -->
+<f-flow fDraggable>
+  <!-- viewport/rendering layer for nodes and connections -->
+  <f-canvas>
+    <!-- renders a connection between matching 'fOutputId' and 'fInputId' -->
+    <f-connection fOutputId="output1" fInputId="input1" [fType]="'bezier'"></f-connection>
+    <f-connection fOutputId="output1" fInputId="input2" [fType]="'bezier'"></f-connection>
+
+    <!-- fnode — directive that turns an element into a node -->
+    <!-- fNodeOutput / fNodeInput — connectors that represent connection endpoints -->
+    <div
+      fNode
+      fDragHandle
+      fNodeOutput
+      [fNodePosition]="{ x: 660, y: 200 }"
+      fOutputId="output1"
+      fOutputConnectableSide="bottom"
+    >
+      Node 1
+    </div>
+
+    <div
+      fNode
+      fDragHandle
+      fNodeInput
+      fNodeOutput
+      [fNodePosition]="{ x: 660, y: 400 }"
+      fInputId="input1"
+      fInputConnectableSide="top"
+      fOutputId="output2"
+      fOutputConnectableSide="bottom"
+    >
+      Node 2
+    </div>
+
+    <div
+      fNode
+      fDragHandle
+      fNodeInput
+      [fNodePosition]="{ x: 800, y: 400 }"
+      fInputId="input2"
+      fInputConnectableSide="top"
+    >
+      Node 3
+    </div>
+  </f-canvas>
+</f-flow>

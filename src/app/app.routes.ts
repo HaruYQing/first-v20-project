@@ -14,6 +14,11 @@ export const routes: Routes = [
         path: 'playground',
         loadComponent: () => import('./features/playground/playground').then((m) => m.Playground),
       },
+      {
+        path: 'workflow',
+        loadComponent: () =>
+          import('./features/workflow-canvas/workflow-canvas').then((m) => m.Floblex),
+      },
     ],
   },
 ];
